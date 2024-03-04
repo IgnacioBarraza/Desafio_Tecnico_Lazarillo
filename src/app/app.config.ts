@@ -15,7 +15,7 @@ export const appConfig: ApplicationConfig = {
       provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
       provideDatabase(() => getDatabase()),
       AngularFireModule.initializeApp(environment.firebaseConfig)
-    ]), provideAnimationsAsync(),
-    
+    ]), 
+    provideAnimationsAsync(),
   ],
 };
