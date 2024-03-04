@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "osmangular-b683b": {
+      "hosting": {
+        "desafiotecnicolazarillo": [
+          "osmangular-b683b"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "osmangular-b683b"
+  }
+}
