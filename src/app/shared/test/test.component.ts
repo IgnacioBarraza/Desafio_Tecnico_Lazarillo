@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, ReactiveFormsModule } from "@angular/forms";
+import { FormGroup, FormControl, ReactiveFormsModule, FormsModule } from "@angular/forms";
 import { FirebaseService } from '../../services/firebase.service';
 import { first } from 'rxjs';
-import { PlaceData, PlaceToDB } from "../../utils/interfaces";
+import { Place } from "../../utils/interfaces";
+import { NominatimService } from '../../services/nominatim.service';
 
 const modules = [
-  ReactiveFormsModule
+  ReactiveFormsModule,
+  FormsModule
 ]
 @Component({
   selector: 'app-test',
@@ -25,8 +27,9 @@ export class TestComponent implements OnInit{
 
   originalPlaces: any[] = [];
   places: any[] = [];
+  searchPlace: string = '';
 
-  constructor(private fs: FirebaseService) {}
+  constructor(private fs: FirebaseService, private nominatim: NominatimService) {}
 
   ngOnInit(): void {
     
@@ -34,11 +37,11 @@ export class TestComponent implements OnInit{
 
   submit() {
     const { placeName, placeAddress, placeId, placeAlias } = this.testGroup.value;
-    const newPlace: PlaceToDB = {
-      placeName: placeName || '',
-      placeAddress: placeAddress || '',
-      placeId: placeId || '',
-      placeAlias: placeAlias || ''
+    const newPlace: Place = {
+      name: placeName || '',
+      address: placeAddress || '',
+      place_id: placeId || '',
+      alias: placeAlias || ''
     }
     this.fs.addPlace(newPlace)
     .then(() => {
@@ -55,9 +58,9 @@ export class TestComponent implements OnInit{
     this.fs.getPlaces().pipe(first()).subscribe(res => {
       res.map(place => {
         const formattedPlace = {
-          name: place.data.placeName,
-          alias: place.data.placeAlias,
-          address: place.data.placeAddress
+          name: place.data.name,
+          alias: place.data.alias,
+          address: place.data.address
         };
         this.originalPlaces.push(place);
         this.places.push(formattedPlace);
@@ -69,5 +72,13 @@ export class TestComponent implements OnInit{
     console.log(this.originalPlaces[index]);
     this.fs.deletePlace(this.originalPlaces[index].key);
     this.getPlaces();
+  }
+
+  search() {
+    const search = this.searchPlace
+    console.log(this.searchPlace);
+    this.nominatim.searchOverpass(search).subscribe(res => {
+      console.log(res);
+    })
   }
 }

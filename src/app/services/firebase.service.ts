@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from "@angular/fire/compat/database";
 import { map } from 'rxjs';
-import { Place, PlaceToDB } from '../utils/interfaces';
+import { Place } from '../utils/interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +22,7 @@ export class FirebaseService {
     );
   }
 
-  addPlace(newPlace: PlaceToDB): Promise<void> {
+  addPlace(newPlace: Place): Promise<void> {
     return new Promise<void>((resolve, reject) => {
       this.db.list('places').push(newPlace)
         .then(() => {

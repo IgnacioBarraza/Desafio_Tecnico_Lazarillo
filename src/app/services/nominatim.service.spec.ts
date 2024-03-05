@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { OsmService } from './osm.service';
+import { NominatimService } from './nominatim.service';
 
-describe('OsmService', () => {
-  let service: OsmService;
+describe('NominatimService', () => {
+  let service: NominatimService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(OsmService);
+    service = TestBed.inject(NominatimService);
   });
 
   it('should be created', () => {
