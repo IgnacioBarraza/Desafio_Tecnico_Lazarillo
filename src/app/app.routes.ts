@@ -6,16 +6,19 @@ import { FavoritesComponent } from './shared/favorites/favorites.component';
 export const routes: Routes = [
   {
     path: '',
+    title: 'Desafió Técnico Lazarillo',
     component: MainViewComponent,
     children: [
       {
         path: 'favorites',
+        title: 'Favoritos',
         component: FavoritesComponent
       }
     ]
   },
   {
     path: 'test',
+    title: 'Testing',
     component: TestComponent
   }
 ];

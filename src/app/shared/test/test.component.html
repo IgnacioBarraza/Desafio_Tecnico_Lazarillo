@@ -37,6 +37,7 @@
   }
   <div class="search-place">
     <input type="text" [(ngModel)]="searchPlace">
-    <button class="btn btn-success" (click)="search()">Buscar</button>
+    <button class="btn btn-success" (click)="search()">Buscar nominatim</button>
+    <button class="btn btn-success" (click)="searchOverpass()">Buscar overpass</button>
   </div>
 </div>

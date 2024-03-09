@@ -3,7 +3,7 @@ import { FormGroup, FormControl, ReactiveFormsModule, FormsModule } from "@angul
 import { FirebaseService } from '../../services/firebase.service';
 import { first } from 'rxjs';
 import { Place } from "../../utils/interfaces";
-import { NominatimService } from '../../services/nominatim.service';
+import { OsmService } from '../../services/osm.service';
 
 const modules = [
   ReactiveFormsModule,
@@ -29,7 +29,7 @@ export class TestComponent implements OnInit{
   places: any[] = [];
   searchPlace: string = '';
 
-  constructor(private fs: FirebaseService, private nominatim: NominatimService) {}
+  constructor(private fs: FirebaseService, private osm: OsmService) {}
 
   ngOnInit(): void {
     
@@ -77,7 +77,14 @@ export class TestComponent implements OnInit{
   search() {
     const search = this.searchPlace
     console.log(this.searchPlace);
-    this.nominatim.searchOverpass(search).subscribe(res => {
+    this.osm.searchNominatim(search).subscribe(res => {
+      console.log(res);
+    })
+  }
+
+  searchOverpass() {
+    const query = this.searchPlace
+    this.osm.searchOverpass(query, 'amenity').subscribe(res => {
       console.log(res);
     })
   }

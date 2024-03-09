@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { NominatimService } from './nominatim.service';
+import { NominatimService } from './osm.service';
 
 describe('NominatimService', () => {
   let service: NominatimService;
