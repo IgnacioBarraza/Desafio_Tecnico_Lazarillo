@@ -1,3 +1,21 @@
 .main-container {
   height: 100%;
 }
+
+@media (max-width: 700px) {
+  .important-component {
+    flex-direction: column !important;
+    justify-content: space-around !important;
+    align-items: center;
+    height: 100%;
+  }
+  .place-list {
+    margin-right: 0;
+  }
+  .map-component {
+    margin-left: 0 !important;
+  }
+  .main-container {
+    align-items: center;
+  }
+}

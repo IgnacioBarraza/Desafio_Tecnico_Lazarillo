@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { MapComponent } from '../map/map.component';
 import { NavbarComponent } from '../navbar/navbar.component';
-import { PlaceCardComponent } from '../place-card/place-card.component';
 import { FooterComponent } from '../footer/footer.component';
+import { PlaceListComponent } from '../place-list/place-list.component';
 
 const modules = [
   MapComponent,
   NavbarComponent,
-  PlaceCardComponent,
+  PlaceListComponent,
   FooterComponent
 ]
 

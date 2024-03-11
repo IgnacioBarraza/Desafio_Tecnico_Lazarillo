@@ -1,1 +1,29 @@
-<p>map works!</p>
+<div class="main-container">
+  <div class="search d-flex align-items-end mb-3">
+    <div class="place-select-menu">
+      <div class="select-btn">
+        @if (optionSelected.length === 0) {
+          <span class="btn-text">Selecciona un lugar</span>
+        } @else {
+          <span class="btn-text">{{optionSelected}}</span>
+        }
+        <i class="fas fa-caret-down"></i>
+      </div>
+      <ul class="options">
+        @for (option of options; track $index) {
+          <li class="place-option" (click)="getPlaceData($index); closePeriodMenu()">
+            <div class="options-container">
+              <span class="option-text">{{option.name}}</span>
+            </div>
+          </li>
+        }
+      </ul>
+    </div>
+    <div class="info-text ms-3">
+      <span>Estas opciones representan lugares ubicados en Santiago de Chile (por ahora 👀)</span>
+    </div>
+  </div>
+  <div class="map-wrapper">
+    <div id="map"></div>
+  </div>
+</div>

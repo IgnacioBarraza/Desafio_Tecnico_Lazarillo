@@ -1,30 +1,56 @@
 <div class="navbar-container d-flex align-items-center justify-content-around">
-  <div class="project-views d-flex">
-    <div class="project-home">
-      <button class="home-btn btn">
-        <a routerLink="" routerLinkActive="active">Inicio</a>
-      </button>
-    </div>
-    <div class="project-favorites">
-      <button class="favorite-btn btn">
-        <a routerLink="/favorites" routerLinkActive="active">Favoritos</a>
-      </button>
+  <div class="burger-menu ms-3">
+    <button class="burger-btn">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <div class="burger-options">
+      <ul>
+        <li>
+          <a routerLink="" routerLinkActive="active">Inicio</a>
+        </li>
+        <li>
+          <a routerLink="/favorites" routerLinkActive="active">Favoritos</a>
+        </li>
+        <li>
+          <a href="https://www.linkedin.com/in/ignacio-barraza-rioja/" target="_blank">LinkedIn</a>
+        </li>
+        <li>
+          <a href="https://github.com/IgnacioBarraza" target="_blank">Github</a>
+        </li>
+      </ul>
     </div>
   </div>
+  @if (mobileView) {
+    <div class="project-views d-flex">
+      <div class="project-home">
+        <button class="home-btn btn">
+          <a routerLink="" routerLinkActive="active">Inicio</a>
+        </button>
+      </div>
+      <div class="project-favorites">
+        <button class="favorite-btn btn">
+          <a routerLink="/favorites" routerLinkActive="active">Favoritos</a>
+        </button>
+      </div>
+    </div>
+  }
   <div class="project-name">
     <span>Desafío Técnico Lazarillo</span>
   </div>
-  <div class="social-networks d-flex">
-    <div class="linkedin">
-      <button class="linkedin-btn btn">
-        <a href="https://www.linkedin.com/in/ignacio-barraza-rioja/" target="_blank">LinkedIn</a>
-      </button>
+  @if (mobileView) {
+    <div class="social-networks d-flex">
+      <div class="linkedin">
+        <button class="linkedin-btn btn">
+          <a href="https://www.linkedin.com/in/ignacio-barraza-rioja/" target="_blank">LinkedIn</a>
+        </button>
+      </div>
+      <div class="github">
+        <button class="github-btn btn">
+          <a href="https://github.com/IgnacioBarraza" target="_blank">Github</a>
+        </button>
+      </div>
     </div>
-    <div class="github">
-      <button class="github-btn btn">
-        <a href="https://github.com/IgnacioBarraza" target="_blank">Github</a>
-      </button>
-    </div>
-  </div>
+  }
 </div>
-<router-outlet></router-outlet>
