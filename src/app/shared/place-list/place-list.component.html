@@ -1,1 +1,15 @@
-<p>place-list works!</p>
+@if (places.length === 0) {
+  <div class="place-list-container">
+    <div>
+      <span>No hay datos para mostrar</span>
+      <i class="fa-solid fa-face-frown"></i>
+    </div>
+  </div>
+} @else {
+  @for (item of places; track $index) {
+    <div class="no-place-list-container">
+      <span>{{item.tags.name}}</span>
+    </div>
+  }
+  <mat-paginator [length]="places.length" [pageSize]="10" [pageSizeOptions]="[10, 15, 25]" [showFirstLastButtons]="true" aria-label="Selecciona una pagina"></mat-paginator>
+}

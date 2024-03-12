@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import * as L from 'leaflet'
 import 'leaflet.fullscreen'
 import { OsmService } from '../../services/osm.service';
+import { PlaceCardService } from '../../services/place-card.service';
 
 @Component({
   selector: 'app-map',
@@ -24,7 +25,7 @@ export class MapComponent implements OnInit{
   ]
   optionSelected: any[] = [];
 
-  constructor(private osm: OsmService) {}
+  constructor(private osm: OsmService, private place: PlaceCardService) {}
 
   ngOnInit(): void {
     this.placeMenu();
@@ -78,11 +79,11 @@ export class MapComponent implements OnInit{
   }
 
   getPlaceData(index: number) {
-    this.optionSelected = []
-    console.log(this.options[index]);
+    this.optionSelected = [];
     this.optionSelected.push(this.options[index].name);
     this.osm.searchOverpass(this.options[index].query, this.options[index].category).subscribe(res => {
-      console.log(res);
+      // console.log(res);
+      this.place.setPlaceList(res);
     })
   }
 }
