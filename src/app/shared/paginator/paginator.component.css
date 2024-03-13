@@ -1,0 +1,15 @@
+.previous-btn:hover,
+.next-btn:hover {
+  background: #F5F5F5;
+}
+
+.btn-text,
+.page-text {
+  font-family: 'Kode mono', monospace;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.paginator {
+  width: 100%;
+}

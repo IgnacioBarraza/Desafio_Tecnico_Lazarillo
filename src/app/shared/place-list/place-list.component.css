@@ -1,0 +1,59 @@
+.place-table-container {
+  width: 100%;
+  height: 100%;
+}
+
+.place-id,
+.place-name,
+.place-city,
+.place-country {
+  font-family: 'Kode mono', monospace;
+  font-weight: 600;
+  color: #fff;
+  text-align: center;
+}
+
+.place-item {
+  font-family: 'Kode mono', monospace;
+  text-align: center;
+}
+
+.place-table {
+  width: 80%;
+  border-collapse: collapse;
+}
+
+.place-table th,
+.place-table td {
+  padding: 8px;
+  border: 1px solid #fff;
+}
+
+.place-table-head {
+  background-color: #000;
+}
+
+.first-text span {
+  font-family: 'Kode mono', monospace;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+@media only screen and (max-width: 700px) {
+  .first-text span {
+    font-size: 14px;
+  }
+  .place-table th,
+  .place-table td {
+    padding: 3px;
+  }
+  .place-item {
+    font-size: 12px;
+  }
+  .place-id,
+  .place-name,
+  .place-city,
+  .place-country {
+    font-size: 13px;
+  }
+}

@@ -8,6 +8,8 @@ export interface Place {
 export interface PlaceList {
   id: number,
   name: string,
+  city: string,
   country: string,
-  city: string
+  lat: number,
+  lon: number
 }

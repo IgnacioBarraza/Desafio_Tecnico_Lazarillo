@@ -1,0 +1,11 @@
+<div class="paginator d-flex justify-content-around align-items-center">
+  <button (click)="prevPage()" class="btn previous-btn">
+    <i class="fa-solid fa-chevron-left"></i>
+    <span class="btn-text ms-2">Prev</span>
+  </button>
+  <span class="page-text">{{ currentPage }} / {{ totalPages }}</span>
+  <button (click)="nextPage()" class="btn next-btn">
+    <span class="btn-text me-2">Next</span>
+    <i class="fa-solid fa-chevron-right"></i>
+  </button>
+</div>
