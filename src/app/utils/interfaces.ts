@@ -4,3 +4,10 @@ export interface Place {
   name: string;
   place_id: string
 }
+
+export interface PlaceList {
+  id: number,
+  name: string,
+  country: string,
+  city: string
+}
