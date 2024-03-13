@@ -1,5 +1,5 @@
 <div class="main-container">
-  <div class="search d-flex align-items-end mb-3">
+  <div class="search d-flex align-items-end mb-3 mt-3">
     <div class="place-select-menu">
       <div class="select-btn">
         @if (optionSelected.length === 0) {
@@ -19,11 +19,18 @@
         }
       </ul>
     </div>
-    <div class="info-text ms-3">
-      <span>Estas opciones representan lugares ubicados en Santiago de Chile (por ahora 👀)</span>
-    </div>
+    @if (!isMapData) {
+      <div class="info-text ms-3">
+        <span>Estas opciones representan lugares ubicados en Santiago de Chile (por ahora 👀)</span>
+      </div>
+    }
   </div>
   <div class="map-wrapper">
+    @if (isAddingMarkers) {
+      <div class="spinner-container">
+        <div class="lds-dual-ring"></div>
+      </div>
+    }
     <div id="map"></div>
   </div>
 </div>

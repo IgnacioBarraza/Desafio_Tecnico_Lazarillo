@@ -19,7 +19,7 @@ export class PlaceCardService {
   formatPlaces(places: any[]) {
     this.formattedPlaces = [];
     places.map( place => {
-      if (place.tags["name"] !== undefined && place.tags["addr:city"] !== undefined && place.tags["addr:country"] !== undefined) {
+      if (place.tags["name"] !== undefined && place.tags["addr:city"] !== undefined && place.tags["addr:country"] !== undefined && place.lat !== undefined && place.lon !== undefined) {
         const formattedPlace: PlaceList = {
           id: place.id,
           name: place.tags["name"],
@@ -39,7 +39,6 @@ export class PlaceCardService {
   }
 
   setMapPlaces(places: PlaceList[]) {
-    console.log(places);
-    this.mapData.next(places)
+    this.mapData.next(places);
   }
 }

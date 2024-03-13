@@ -43,13 +43,13 @@ export class TestComponent implements OnInit{
       place_id: placeId || '',
       alias: placeAlias || ''
     }
-    this.fs.addPlace(newPlace)
-    .then(() => {
-      this.testGroup.reset(); // Reset the form after successful submission
-    })
-    .catch(error => {
-      console.error(error);
-    });
+    // this.fs.addPlace(newPlace)
+    // .then(() => {
+    //   this.testGroup.reset(); // Reset the form after successful submission
+    // })
+    // .catch(error => {
+    //   console.error(error);
+    // });
   }
 
   getPlaces() {

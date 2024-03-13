@@ -22,7 +22,11 @@
             <td class="place-item">{{place.id}}</td>
             <td class="place-item">{{place.name}}</td>
             <td class="place-item">{{place.city}}</td>
-            <td class="place-item">{{place.country}}</td>
+            <td class="">
+              <button class="btn btn-primary" (click)="addToFavorites($index)">
+                <span class="btn-text">Agregar</span>
+              </button>
+            </td>
           </tr>
         }
       </tbody>

@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import * as L from 'leaflet'
-import 'leaflet.fullscreen'
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import * as L from 'leaflet';
+import 'leaflet.fullscreen';
 import { OsmService } from '../../services/osm.service';
 import { PlaceCardService } from '../../services/place-card.service';
+import { Subject, takeUntil } from 'rxjs';
+import { PlaceList } from '../../utils/interfaces';
 
 @Component({
   selector: 'app-map',
@@ -11,7 +13,8 @@ import { PlaceCardService } from '../../services/place-card.service';
   templateUrl: './map.component.html',
   styleUrl: './map.component.css'
 })
-export class MapComponent implements OnInit{
+export class MapComponent implements OnInit, OnDestroy {
+  onDestroy$: Subject<boolean> = new Subject();
 
   map: any;
   places: any;
@@ -20,31 +23,64 @@ export class MapComponent implements OnInit{
     {name: 'Bares / Pubs', query: 'bar', category: 'amenity'},
     {name: 'Bancos', query: 'bank', category: 'amenity'},
     {name: 'Universidades', query: 'university', category: 'amenity'},
-    {name: 'Metro', query: 'station', category: 'public_transport'},
     {name: 'Restaurantes', query: 'restaurant', category: 'amenity'},
   ]
   optionSelected: any[] = [];
+  isMapData: boolean = false;
+  markersLayer: any;
+  isAddingMarkers: boolean = true;
 
-  constructor(private osm: OsmService, private place: PlaceCardService) {}
+  constructor(private osm: OsmService, private placeService: PlaceCardService) {}
 
   ngOnInit(): void {
     this.placeMenu();
-    this.createMap()
+    this.initMap();
+    this.placeService.mapData$.pipe(takeUntil(this.onDestroy$)).subscribe(places => {
+      if (places.length > 0) {
+        const startSetMarkers = performance.now();
+        this.setMarkers(places);
+        const endSetMarkers = performance.now();
+        this.isAddingMarkers = false
+        this.isMapData = true;
+      }
+    })
   }
 
-  createMap() {
+  ngOnDestroy(): void {
+    this.onDestroy$.next(true);
+  }
+
+  initMap() {
     this.map = L.map('map', {
+      center: [-33.4481648562531, -70.66892986850647],
+      zoom: 11,
       fullscreenControl: true,
       fullscreenControlOptions: {
         position: 'topleft',
         content: '<i class="fa-solid fa-expand fa-lg"></i>',
       }
-    }).setView([-33.4481648562531, -70.66892986850647], 10);
+    })
 
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     }).addTo(this.map);
+
+    this.markersLayer = L.layerGroup().addTo(this.map);
+  }
+
+  setMarkers(places: PlaceList[]) {
+    // Clear existing markers from the map
+    this.markersLayer.clearLayers();
+    this.isAddingMarkers = true;
+
+    places.forEach(place => {
+      const marker = L.marker([place.lat, place.lon]);
+      marker.bindPopup(`<b>${place.name}</b><br>${place.city}, ${place.country}`).openPopup();
+      this.markersLayer.addLayer(marker);
+    });
+
+    this.isAddingMarkers = false;
   }
 
   placeMenu() {
@@ -83,7 +119,16 @@ export class MapComponent implements OnInit{
     this.optionSelected.push(this.options[index].name);
     this.osm.searchOverpass(this.options[index].query, this.options[index].category).subscribe(res => {
       // console.log(res);
-      this.place.setPlaceList(res);
+      this.placeService.setPlaceList(res);
     })
+  }
+
+  showSpinner() {
+    console.log('object');
+    this.isAddingMarkers = true;
+  }
+
+  hideSpinner() {
+    this.isAddingMarkers = false;
   }
 }

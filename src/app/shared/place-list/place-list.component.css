@@ -39,6 +39,12 @@
   font-weight: 700;
 }
 
+.btn-text {
+  font-family: 'Kode mono', monospace;
+  font-size: 14px;
+  font-weight: 700;
+}
+
 @media only screen and (max-width: 700px) {
   .first-text span {
     font-size: 14px;

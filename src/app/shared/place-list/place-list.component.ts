@@ -3,6 +3,7 @@ import { PlaceCardService } from '../../services/place-card.service';
 import { Subject, takeUntil } from 'rxjs';
 import { PaginatorComponent } from '../paginator/paginator.component';
 import { PlaceList } from '../../utils/interfaces';
+import { FirebaseService } from '../../services/firebase.service';
 
 const modules = [
   PaginatorComponent
@@ -25,7 +26,7 @@ export class PlaceListComponent implements OnInit, OnDestroy {
   itemsPerPage: number = 10;
   mobileView: boolean = false;
 
-  constructor(private placeService: PlaceCardService) {
+  constructor(private placeService: PlaceCardService, private fs: FirebaseService) {
     this.handleResize();
     window.addEventListener('resize', this.handleResize.bind(this));
   }
@@ -42,6 +43,7 @@ export class PlaceListComponent implements OnInit, OnDestroy {
           const formattedPlaces = this.placeService.formatPlaces(res);
           this.places = formattedPlaces;
           this.placeService.setMapPlaces(formattedPlaces);
+          this.currentPage = 1;
           this.totalPages = Math.ceil(this.places.length / this.itemsPerPage);
           this.updatePaginatedPlaces();
         }
@@ -67,5 +69,10 @@ export class PlaceListComponent implements OnInit, OnDestroy {
 
   handleResize() {
     this.mobileView = window.innerWidth < 700 ? true : false;
+  }
+
+  addToFavorites(index: number) {
+    console.log(this.places[index]);
+    this.fs.addPlace(this.places[index]);
   }
 }
