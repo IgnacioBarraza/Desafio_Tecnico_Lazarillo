@@ -72,7 +72,8 @@ export class PlaceListComponent implements OnInit, OnDestroy {
   }
 
   addToFavorites(index: number) {
-    console.log(this.places[index]);
-    this.fs.addPlace(this.places[index]);
+    this.fs.addPlace(this.paginatedPlaces[index]).then(() => {
+      console.log('object');
+    });
   }
 }
