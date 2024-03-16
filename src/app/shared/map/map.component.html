@@ -1,7 +1,7 @@
 <div class="main-container">
   <div class="search d-flex align-items-end mb-3 mt-3">
     <div class="place-select-menu">
-      <div class="select-btn">
+      <div class="select-btn" aria-labelledby="Selector de lugares">
         @if (optionSelected.length === 0) {
           <span class="btn-text">Selecciona un lugar</span>
         } @else {
@@ -9,7 +9,7 @@
         }
         <i class="fas fa-caret-down"></i>
       </div>
-      <ul class="options">
+      <ul class="options" aria-labelledby="Opciones">
         @for (option of options; track $index) {
           <li class="place-option" (click)="getPlaceData($index); closePeriodMenu()">
             <div class="options-container">

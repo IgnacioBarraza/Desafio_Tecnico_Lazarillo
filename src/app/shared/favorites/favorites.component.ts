@@ -5,12 +5,14 @@ import { PlaceCardComponent } from '../place-card/place-card.component';
 import { FirebaseService } from '../../services/firebase.service';
 import { PlaceList } from '../../utils/interfaces';
 import { MapComponent } from '../map/map.component';
+import { MatSnackBarModule, MatSnackBar } from "@angular/material/snack-bar";
 
 const modules = [
   NavbarComponent,
   FooterComponent,
   PlaceCardComponent,
-  MapComponent
+  MapComponent,
+  MatSnackBarModule
 ]
 
 @Component({
@@ -26,7 +28,7 @@ export class FavoritesComponent implements OnInit{
   placesKey: any[] = [];
   favoritePlace: PlaceList[] = [];
 
-  constructor(private fs: FirebaseService) {}
+  constructor(private fs: FirebaseService, private _snackBar: MatSnackBar) {}
 
   ngOnInit(): void {
     this.getFavoritePlaces();
@@ -55,14 +57,18 @@ export class FavoritesComponent implements OnInit{
       }
       this.favoritePlace.push(favoritePlace);
     });
-    console.log(this.favoritePlace);
   }
 
   deleteFromFavorites(index: number) {
-    console.log(this.placesKey[index]);
     this.fs.deletePlace(this.placesKey[index]).then( () => {
       console.log('Lugar eliminado correctamente');
-      this.getFavoritePlaces()
+      this.favoritePlaces = [];
+      this.getFavoritePlaces();
+      this._snackBar.open('Lugar eliminado correctamente', 'Cerrar', {
+        duration: 5000, // Time in mili seconds
+        horizontalPosition: 'center',
+        verticalPosition: 'bottom',
+      })
     })
   }
 }

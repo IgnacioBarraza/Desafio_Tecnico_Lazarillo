@@ -9,11 +9,9 @@
           <span class="card-title">{{place.name}}</span>
           <span class="card-subtitle mb-2 text-body-secondary">Place id: {{place.id}}</span>
           <span class="card-text">Comuna: {{place.city}}</span>
-          <div class="action-btns m-1 d-flex align-items-center justify-content-between">
-            <button class="btn btn-danger" (click)="deleteFromFavorites($index)">
-              <span class="btn-text">Eliminar</span>
-            </button>
-          </div>
+          <button class="btn btn-danger" (click)="deleteFromFavorites($index)">
+            <span class="btn-text">Eliminar</span>
+          </button>
         </div>
       </div>
     }
