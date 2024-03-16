@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from "@angular/fire/compat/database";
 import { map } from 'rxjs';
-import { Place, PlaceList } from '../utils/interfaces';
+import { PlaceList } from '../utils/interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -15,11 +15,22 @@ export class FirebaseService {
       map(places => {
         return places.map(place => {
           const key = place.key;
-          const data = place.payload.val() as Place;
+          const data = place.payload.val() as PlaceList;
           return {key, data};
         })
       })
     );
+  }
+
+  getPlaceById(key: string) {
+    return this.db.list(`places/${key}`).snapshotChanges().pipe(
+      map(places => {
+        return places.map(place => {
+          const data: any = place.payload.val()
+          return data
+        })
+      })
+    )
   }
 
   addPlace(newPlace: PlaceList): Promise<void> {

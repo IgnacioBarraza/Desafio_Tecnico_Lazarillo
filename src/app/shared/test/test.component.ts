@@ -55,17 +55,17 @@ export class TestComponent implements OnInit{
   getPlaces() {
     this.originalPlaces = [];
     this.places = [];
-    this.fs.getPlaces().pipe(first()).subscribe(res => {
-      res.map(place => {
-        const formattedPlace = {
-          name: place.data.name,
-          alias: place.data.alias,
-          address: place.data.address
-        };
-        this.originalPlaces.push(place);
-        this.places.push(formattedPlace);
-      });
-    });
+    // this.fs.getPlaces().pipe(first()).subscribe(res => {
+    //   res.map(place => {
+    //     const formattedPlace = {
+    //       name: place.data.name,
+    //       alias: place.data.alias,
+    //       address: place.data.address
+    //     };
+    //     this.originalPlaces.push(place);
+    //     this.places.push(formattedPlace);
+    //   });
+    // });
   }
 
   deletePlace(index: number) {

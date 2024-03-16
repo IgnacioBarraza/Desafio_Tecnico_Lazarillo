@@ -13,7 +13,7 @@
           <th class="place-id">Place ID</th>
           <th class="place-name">Nombre</th>
           <th class="place-city">Comuna</th>
-          <th class="place-country">País</th>
+          <th class="place-country">Acción</th>
         </tr>
       </thead>
       <tbody class="place-table-body">
@@ -22,7 +22,7 @@
             <td class="place-item">{{place.id}}</td>
             <td class="place-item">{{place.name}}</td>
             <td class="place-item">{{place.city}}</td>
-            <td class="">
+            <td class="d-flex align-items-center justify-content-center">
               <button class="btn btn-primary" (click)="addToFavorites($index)">
                 <span class="btn-text">Agregar</span>
               </button>

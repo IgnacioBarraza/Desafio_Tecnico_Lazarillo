@@ -4,9 +4,11 @@ import { Subject, takeUntil } from 'rxjs';
 import { PaginatorComponent } from '../paginator/paginator.component';
 import { PlaceList } from '../../utils/interfaces';
 import { FirebaseService } from '../../services/firebase.service';
+import { MatSnackBar, MatSnackBarModule } from "@angular/material/snack-bar";
 
 const modules = [
-  PaginatorComponent
+  PaginatorComponent,
+  MatSnackBarModule
 ]
 @Component({
   selector: 'app-place-list',
@@ -26,7 +28,7 @@ export class PlaceListComponent implements OnInit, OnDestroy {
   itemsPerPage: number = 10;
   mobileView: boolean = false;
 
-  constructor(private placeService: PlaceCardService, private fs: FirebaseService) {
+  constructor(private placeService: PlaceCardService, private fs: FirebaseService, private _snackBar: MatSnackBar) {
     this.handleResize();
     window.addEventListener('resize', this.handleResize.bind(this));
   }
@@ -73,7 +75,11 @@ export class PlaceListComponent implements OnInit, OnDestroy {
 
   addToFavorites(index: number) {
     this.fs.addPlace(this.paginatedPlaces[index]).then(() => {
-      console.log('object');
+      this._snackBar.open('Lugar agregado correctamente', 'Cerrar', {
+        duration: 5000, // Time in mili seconds
+        horizontalPosition: 'center',
+        verticalPosition: 'bottom',
+      })
     });
   }
 }
