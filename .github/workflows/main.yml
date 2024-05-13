@@ -20,7 +20,3 @@ jobs:
       - name: Run deployment
         if: matrix.os == 'ubuntu-latest'
         uses: ./.github/workflows/deploy_ubuntu.yml
-
-      # - name: Run deployment
-        # if: matrix.os == 'windows-latest'
-        # uses: ./.github/workflows/deploy_windows.yml
