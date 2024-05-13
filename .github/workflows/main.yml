@@ -3,7 +3,7 @@ name: Main Workflow
 on:
   push:
     branches:
-      - main  # Adjust the branch name as needed
+      - main
 
 jobs:
   deploy:
@@ -11,7 +11,7 @@ jobs:
 
     strategy:
       matrix:
-        os: [ubuntu-22.04, windows-latest]
+        os: [ubuntu-latest, windows-latest]
 
     steps:
       - name: Checkout code
