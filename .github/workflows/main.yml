@@ -11,7 +11,7 @@ jobs:
 
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest]
+        os: [ubuntu-22.04, windows-latest]
 
     steps:
       - name: Checkout code
@@ -23,4 +23,4 @@ jobs:
 
       - name: Run deployment
         if: matrix.os == 'windows-latest'
-        uses: ./.github/workflows/windows.yml
+        uses: ./.github/workflows/deploy_windows.yml

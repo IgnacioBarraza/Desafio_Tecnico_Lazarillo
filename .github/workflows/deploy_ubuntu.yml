@@ -10,4 +10,4 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - name: Deploy using reusable action
-        uses: ./.github/actions/deploy_ubuntu
+        uses: ./.github/actions/deploy_ubuntu/
