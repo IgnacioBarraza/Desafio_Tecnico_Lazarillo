@@ -15,7 +15,7 @@ jobs:
 
       - name: Set max listeners for TLSSocket
         run: |
-          echo "process.setMaxListeners(15);" >> ./src/server.js
+          echo "process.setMaxListeners(0);" >> ./src/server.js
         working-directory: /home/nacho/Desktop/Desafio_Tecnico_Lazarillo
 
       - name: Install dependencies and build
