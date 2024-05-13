@@ -15,15 +15,15 @@ jobs:
 
       - name: Install dependencies and build
         run: |
-          cd nacho@192.168.1.85:/home/nacho/Desktop/Desafio_Tecnico_Lazarillo/
+          cd /home/nacho/Desktop/Desafio_Tecnico_Lazarillo/
           npm install
           npm run build
       - name: Copy build files to Raspberry Pi server
         run: |
-          sudo scp -r nacho@192.168.1.85:/home/nacho/Desktop/Desafio_Tecnico_Lazarillo/dist/desafio_tecnico_lazarillo/browser/ nacho@192.168.1.85:/var/www/
+          sudo scp -r /home/nacho/Desktop/Desafio_Tecnico_Lazarillo/dist/desafio_tecnico_lazarillo/browser/ /var/www/
       - name: Copy Nginx configuration file to Raspberry Pi server
         run: |
-          sudo scp nacho@192.168.1.85:/home/nacho/Desktop/rpi_configuration_files/tech_challenge.conf nacho@192.168.1.85:/etc/nginx/sites-available/
+          sudo scp /home/nacho/Desktop/rpi_configuration_files/tech_challenge.conf /etc/nginx/sites-available/
       - name: Create symbolic link for Nginx configuration
         run: ssh nacho@192.168.1.85 sudo ln -s /etc/nginx/sites-available/tech_challenge.conf /etc/nginx/sites-enabled/
 
