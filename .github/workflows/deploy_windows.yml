@@ -1,0 +1,33 @@
+name: Deploy Project
+
+on:
+  push:
+    branches:
+      - main  # Adjust the branch name as needed
+
+jobs:
+  deploy:
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install dependencies and build
+        run: |
+          cd /home/lazarillo/Desktop/Desafio_Tecnico_Lazarillo
+          npm install  # Or any other dependency installation command
+          npm run build  # Or the command to build your project
+
+      - name: Copy build files to Raspberry Pi server
+        run: |
+          scp -r /home/lazarillo/Desktop/Desafio_Tecnico_Lazarillo/build/ nacho@192.168.1.85:/var/www/
+
+      - name: Copy Nginx configuration file to Raspberry Pi server
+        run: |
+          scp /etc/nginx/sites-available/your_config_file nacho@192.168.1.85:/etc/nginx/sites-available/
+
+      - name: Create symbolic link for Nginx configuration
+        run: ssh nacho@192.168.1.85 sudo ln -s /etc/nginx/sites-available/your_config_file /etc/nginx/sites-enabled/
+
+      - name: Restart Nginx on Raspberry Pi server
+        run: ssh nacho@192.168.1.85 sudo systemctl restart nginx
