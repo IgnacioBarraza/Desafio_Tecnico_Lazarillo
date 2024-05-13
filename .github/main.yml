@@ -1,0 +1,26 @@
+name: Main Workflow
+
+on:
+  push:
+    branches:
+      - main  # Adjust the branch name as needed
+
+jobs:
+  deploy:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Run deployment
+        if: matrix.os == 'ubuntu-latest'
+        uses: .github/workflows/deploy_ubuntu.yml
+
+      - name: Run deployment
+        if: matrix.os == 'windows-latest'
+        uses: .github/workflows/deploy_windows.yml
