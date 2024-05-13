@@ -19,7 +19,7 @@ export class OsmService {
   searchOverpass(query: string, category: string) {
     const overpassQuery = `
       [out:json][timeout:25];
-      area(id:3600198848)->.searchArea;
+      area(id:3600167454)->.searchArea;
       nwr["${category}"="${query}"](area.searchArea);
       out;
     `;
