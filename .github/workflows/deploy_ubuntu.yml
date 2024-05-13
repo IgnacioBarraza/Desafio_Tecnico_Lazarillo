@@ -3,11 +3,11 @@ name: Deploy to ubuntu
 on:
   push:
     branches:
-      - main  # Adjust the branch name as needed
+      - main
 
 jobs:
   deploy:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     steps:
       - name: Deploy using reusable action
         uses: ./.github/actions/deploy_ubuntu/
