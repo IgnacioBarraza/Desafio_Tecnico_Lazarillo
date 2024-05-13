@@ -3,7 +3,7 @@ name: Deploy to ubuntu
 on:
   push:
     branches:
-      - main  # Adjust the branch name as needed
+      - main
 
 jobs:
   deploy:
@@ -16,8 +16,8 @@ jobs:
       - name: Install dependencies and build
         run: |
           cd /home/lazarillo/Desktop/Desafio_Tecnico_Lazarillo
-          npm install  # Or any other dependency installation command
-          npm run build  # Or the command to build your project
+          npm install
+          npm run build
       - name: Copy build files to Raspberry Pi server
         run: |
           sudo scp -r /home/lazarillo/Desktop/Desafio_Tecnico_Lazarillo/dist/desafio_tecnico_lazarillo/browser/ nacho@192.168.1.85:/var/www/
