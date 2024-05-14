@@ -26,6 +26,5 @@ jobs:
             key: ${{ secrets.SSH_PRIVATE_KEY }}
             port: ${{ secrets.RPI_PORT }}
             script: |
-              ssh nacho@${{ secrets.RPI_HOST }} 'rm -rf /home/nacho/Desktop/tech-challenge/build'
-              scp -r C:\Users\ignac\Desktop\Full Stack Projects\DesafioTecnicoLazarillo\build nacho@${{ secrets.RPI_HOST }}:/home/nacho/Desktop/tech-challenge
+              scp -r C:\Users\ignac\Desktop\Full Stack Projects\DesafioTecnicoLazarillo\build nacho@152.172.92.209:/home/nacho/Desktop/tech-challenge
         
