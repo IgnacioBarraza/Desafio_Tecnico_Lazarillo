@@ -19,11 +19,6 @@ jobs:
           npm run build
 
       - name: Deploy to Raspberry Pi
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.RPI_HOST }}
-          username: ${{ secrets.RPI_USERNAME }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          port: ${{ secrets.RPI_PORT }}
-          script: |
-            scp -r C:\Users\ignac\Desktop\Full Stack Projects\DesafioTecnicoLazarillo\dist/desafio-tecnico-lazarillo/browser nacho@192.168.1.85:/home/nacho/Desktop/tech-challenge
+        run: |
+          scp -r -P <port> -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null C:\Users\ignac\Desktop\Full Stack Projects\DesafioTecnicoLazarillo\dist/desafio-tecnico-lazarillo/browser user@192.168.1.85:/home/***/Desktop/tech-challenge
+        
