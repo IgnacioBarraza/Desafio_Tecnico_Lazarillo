@@ -20,5 +20,5 @@ jobs:
 
       - name: Deploy to Raspberry Pi
         run: |
-          scp -r -P <port> -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null C:\Users\ignac\Desktop\Full Stack Projects\DesafioTecnicoLazarillo\dist/desafio-tecnico-lazarillo/browser user@192.168.1.85:/home/***/Desktop/tech-challenge
+          scp -r -P 22 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null C:\Users\ignac\Desktop\Full Stack Projects\DesafioTecnicoLazarillo\dist/desafio-tecnico-lazarillo/browser user@192.168.1.85:/home/***/Desktop/tech-challenge
         
