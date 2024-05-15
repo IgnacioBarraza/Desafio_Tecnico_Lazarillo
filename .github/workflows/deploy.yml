@@ -23,7 +23,7 @@ jobs:
         with:
             host: ${{ secrets.RPI_HOST }}
             username: ${{ secrets.RPI_USERNAME }}
-            password: ${{secrets.RPI_PASSWORD}}
+            key: ${{secrets.SSH_PRIVATE_KEY}}
             port: ${{ secrets.RPI_PORT }}
             script: |
               scp -r C:\Users\ignac\Desktop\Full Stack Projects\DesafioTecnicoLazarillo\dist\desafio-tecnico-lazarillo\browser nacho@192.168.1.85:/home/nacho/Desktop/tech-challenge
