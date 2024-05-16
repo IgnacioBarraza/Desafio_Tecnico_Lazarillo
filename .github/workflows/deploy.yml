@@ -29,4 +29,4 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ secrets.RPI_PORT }}
           script: |
-            scp -r ./dist ${{ secrets.RPI_USERNAME }}@${{ secrets.RPI_HOST }}:/home/${{ secrets.RPI_USERNAME }}/Desktop/tech-challenge
+            sudo cp -r ./dist ${{ secrets.RPI_USERNAME }}@${{ secrets.RPI_HOST }}:/home/${{ secrets.RPI_USERNAME }}/Desktop/tech-challenge
