@@ -24,9 +24,9 @@ jobs:
       - name: Deploy to Raspberry Pi
         uses: appleboy/ssh-action@master
         with:
-          host: ${{ secrets.RPI_HOST }}
-          username: ${{ secrets.RPI_USERNAME }}
+          host: 192.168.1.85
+          username: nacho
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          port: ${{ secrets.RPI_PORT }}
+          port: 22
           script: |
-            sudo cp -r ./dist ${{ secrets.RPI_USERNAME }}@${{ secrets.RPI_HOST }}:/home/${{ secrets.RPI_USERNAME }}/Desktop/tech-challenge
+            scp -r ~/dist nacho@192.168.1.85:/home/nacho/
