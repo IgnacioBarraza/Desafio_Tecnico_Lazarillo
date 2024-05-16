@@ -29,6 +29,6 @@ jobs:
         username: ${{ secrets.RPI_USERNAME }}
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         password: ${{secrets.RPI_PASSWORD}}
-        source: dist/desafio-tecnico-lazarillo/
-        target: "/home/nacho/"
+        source: dist/desafio-tecnico-lazarillo/*
+        target: "/home/nacho/Desktop/tech-challenge/"
         strip_components: 1
