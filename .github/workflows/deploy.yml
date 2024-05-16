@@ -26,5 +26,5 @@ jobs:
             key: ${{secrets.SSH_PRIVATE_KEY}}
             port: ${{ secrets.RPI_PORT }}
             script: |
-              scp -r /home/runner/work/Desafio_Tecnico_Lazarillo/Desafio_Tecnico_Lazarillo/dist/desafio-tecnico-lazarillo nacho@192.168.1.85:/home/nacho/Desktop/tech-challenge
+              scp -r dist/* nacho@192.168.1.85:/home/nacho/Desktop/tech-challenge/
         
