@@ -18,13 +18,7 @@ jobs:
           npm install
           npm run build
 
-      - name: Deploy to Raspberry Pi
-        uses: appleboy/ssh-action@master
-        with:
-            host: ${{ secrets.RPI_HOST }}
-            username: ${{ secrets.RPI_USERNAME }}
-            key: ${{secrets.SSH_PRIVATE_KEY}}
-            port: ${{ secrets.RPI_PORT }}
-            script: |
-              ls -al
+      - name: Know where the fckng file are
+        run: |
+          ls -al
         
