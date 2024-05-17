@@ -4,7 +4,9 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --configuration production",
+    "build": "ng build",
+    "docker-run": "docker run --rm -e PASSWORD='1301' -v \"C:/Users/ignac/Desktop/Full Stack Projects/DesafioTecnicoLazarillo/dist:/transfer/dist\" file-transfer",
+    "build-n-deploy": "npm run build && npm run docker-run",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "deploy": "npm run build && firebase deploy"
