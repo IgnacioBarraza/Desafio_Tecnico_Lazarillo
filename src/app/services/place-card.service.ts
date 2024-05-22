@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { PlaceList } from "../utils/interfaces";
 
 @Injectable({
@@ -8,6 +8,8 @@ import { PlaceList } from "../utils/interfaces";
 export class PlaceCardService {
   private placeData: BehaviorSubject<any> = new BehaviorSubject({});
   private mapData: BehaviorSubject<PlaceList[]> =  new BehaviorSubject({} as PlaceList[]);
+
+  favoritePlaces = new Subject<void>();
 
   placeData$: Observable<any> = this.placeData.asObservable();
   mapData$: Observable<PlaceList[]> = this.mapData.asObservable();
@@ -40,5 +42,9 @@ export class PlaceCardService {
 
   setMapPlaces(places: PlaceList[]) {
     this.mapData.next(places);
+  }
+
+  getFavoritesPlaces() {
+    this.favoritePlaces.next()
   }
 }

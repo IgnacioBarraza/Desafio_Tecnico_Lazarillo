@@ -1,6 +1,5 @@
 import { Routes } from '@angular/router';
 import { MainViewComponent } from './shared/main-view/main-view.component';
-import { TestComponent } from './shared/test/test.component';
 import { FavoritesComponent } from './shared/favorites/favorites.component';
 
 export const routes: Routes = [
@@ -14,9 +13,4 @@ export const routes: Routes = [
     title: 'Favoritos',
     component: FavoritesComponent
   },
-  {
-    path: 'test',
-    title: 'Testing',
-    component: TestComponent
-  }
 ];

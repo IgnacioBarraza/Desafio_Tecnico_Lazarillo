@@ -1,25 +1,14 @@
 <div class="place-carousel">
   <div class="place-card-wrapper">
-    @for (place of favoritePlaces; track $index) {
-      <div class="place-card d-flex flex-column align-items-baseline justify-content-between">
-        <div class="place-type d-flex align-items-center justify-content-start pt-2">
-          <span class="place-name">{{place.name}}</span>
-        </div>
-        <div class="place-info d-flex ps-2">
-          <div class="text-success">
-            <i class="fa-solid fa-circle fa-2xs"></i>
-            <span class="ms-2">{{place.city}}</span>
-          </div>
-        </div>
-        <div class="d-flex ps-2">
-          <span class="ms-2 d-flex justify-content-center align-items-center entrance-name">{{place.id}}</span>
-        </div>
-        <div class="delete-favorite">
-          <button class="btn btn-delete-favorite" (click)="deleteFromFavorites($index)">
-            <span class="me-2 btn-text">Eliminar</span>
-          </button>
-        </div>
+    <div class="card m-2" style="width: 18rem;">
+      <div class="card-body d-flex flex-column justify-content-between">
+        <span class="card-title">{{place.name}}</span>
+        <span class="card-subtitle mb-2 text-body-secondary">Place id: {{place.id}}</span>
+        <span class="card-text">Comuna: {{place.city}}</span>
+        <button class="btn btn-danger" (click)="deleteFromFavorites(favoritePlaces.key)">
+          <span class="btn-text">Eliminar</span>
+        </button>
       </div>
-    }
+    </div>
   </div>
 </div>

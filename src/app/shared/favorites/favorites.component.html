@@ -4,20 +4,11 @@
   </div>
   <div class="main-card-container d-flex flex-wrap align-items-center justify-content-center">
     @for (place of favoritePlaces; track $index) {
-      <div class="card m-2" style="width: 18rem;">
-        <div class="card-body d-flex flex-column justify-content-between">
-          <span class="card-title">{{place.name}}</span>
-          <span class="card-subtitle mb-2 text-body-secondary">Place id: {{place.id}}</span>
-          <span class="card-text">Comuna: {{place.city}}</span>
-          <button class="btn btn-danger" (click)="deleteFromFavorites($index)">
-            <span class="btn-text">Eliminar</span>
-          </button>
-        </div>
-      </div>
+      <app-place-card [favoritePlaces]="place"></app-place-card>
     }
-  <div class="important-component">
+  <!-- <div class="important-component">
     <app-place-card />
-  </div>
+  </div> -->
   <div class="footer-component">
     <app-footer />
   </div>

@@ -1,36 +1,45 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { PlaceList } from '../../utils/interfaces';
 import { FirebaseService } from '../../services/firebase.service';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { PlaceCardService } from '../../services/place-card.service';
+
+const modules = [
+  MatSnackBarModule
+]
 
 @Component({
   selector: 'app-place-card',
   standalone: true,
-  imports: [],
+  imports: modules,
   templateUrl: './place-card.component.html',
   styleUrl: './place-card.component.css'
 })
 export class PlaceCardComponent implements OnInit{
 
-  favoritePlaces: PlaceList[] = [];
+  @Input() favoritePlaces: any;
+  @Input() favoritePlaceskey: any[];
 
-  constructor(private fs: FirebaseService) {}
+  place: PlaceList;
+
+  constructor(
+    private fs: FirebaseService,
+    private _snackBar: MatSnackBar,
+    private placeCardService: PlaceCardService) {}
 
   ngOnInit(): void {
-    this.favoritePlaces = [];
-    this.fs.getPlaces().subscribe(res => {
-      console.log(res);
-      if (res.length > 0) {
-        res.map( place => {
-          console.log(place.data);
-          this.favoritePlaces.push(place.data);
-        })
-      } else {
-        console.log('No places to show');
-      }
-    })
+    this.place = this.favoritePlaces.data
   }
 
-  deleteFromFavorites(index: number) {
-    console.log(index);
+  deleteFromFavorites(placeKey: string) {
+    this.favoritePlaces = [];
+    this.fs.deletePlace(placeKey).then(() => {
+      this.placeCardService.getFavoritesPlaces();
+      this._snackBar.open('Lugar eliminado correctamente', 'Cerrar', {
+        duration: 5000, // Time in mili seconds
+        horizontalPosition: 'center',
+        verticalPosition: 'bottom',
+      })
+    })
   }
 }

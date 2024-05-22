@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NavbarComponent } from "../navbar/navbar.component";
 import { FooterComponent } from "../footer/footer.component";
 import { PlaceCardComponent } from '../place-card/place-card.component';
@@ -6,6 +6,8 @@ import { FirebaseService } from '../../services/firebase.service';
 import { PlaceList } from '../../utils/interfaces';
 import { MapComponent } from '../map/map.component';
 import { MatSnackBarModule, MatSnackBar } from "@angular/material/snack-bar";
+import { PlaceCardService } from '../../services/place-card.service';
+import { Subject, takeUntil } from 'rxjs';
 
 const modules = [
   NavbarComponent,
@@ -22,25 +24,37 @@ const modules = [
     styleUrl: './favorites.component.css',
     imports: modules
 })
-export class FavoritesComponent implements OnInit{
+export class FavoritesComponent implements OnInit, OnDestroy{
 
-  favoritePlaces: PlaceList[] = [];
-  placesKey: any[] = [];
+  favoritePlaces: any[];
   favoritePlace: PlaceList[] = [];
+  onDestroy$ = new Subject<boolean>();
 
-  constructor(private fs: FirebaseService, private _snackBar: MatSnackBar) {}
+  constructor(
+    private fs: FirebaseService, 
+    private _snackBar: MatSnackBar,
+    private placeCardService: PlaceCardService) {}
 
   ngOnInit(): void {
     this.getFavoritePlaces();
+
+    this.placeCardService.favoritePlaces
+      .asObservable()
+      .pipe(takeUntil(this.onDestroy$))
+      .subscribe( (_) => {
+        this.getFavoritePlaces()
+      })
+  }
+
+  ngOnDestroy(): void {
+    this.onDestroy$.next(true)
   }
 
   getFavoritePlaces() {
     this.favoritePlaces = [];
-    this.placesKey = [];
     this.fs.getPlaces().subscribe( places => {
       places.map( place => {
-        this.favoritePlaces.push(place.data);
-        this.placesKey.push(place.key);
+        this.favoritePlaces.push(place);
       })
     })
   }
@@ -59,16 +73,5 @@ export class FavoritesComponent implements OnInit{
     });
   }
 
-  deleteFromFavorites(index: number) {
-    this.fs.deletePlace(this.placesKey[index]).then( () => {
-      console.log('Lugar eliminado correctamente');
-      this.favoritePlaces = [];
-      this.getFavoritePlaces();
-      this._snackBar.open('Lugar eliminado correctamente', 'Cerrar', {
-        duration: 5000, // Time in mili seconds
-        horizontalPosition: 'center',
-        verticalPosition: 'bottom',
-      })
-    })
-  }
+  
 }

@@ -118,13 +118,11 @@ export class MapComponent implements OnInit, OnDestroy {
     this.optionSelected = [];
     this.optionSelected.push(this.options[index].name);
     this.osm.searchOverpass(this.options[index].query, this.options[index].category).subscribe(res => {
-      // console.log(res);
       this.placeService.setPlaceList(res);
     })
   }
 
   showSpinner() {
-    console.log('object');
     this.isAddingMarkers = true;
   }
 
